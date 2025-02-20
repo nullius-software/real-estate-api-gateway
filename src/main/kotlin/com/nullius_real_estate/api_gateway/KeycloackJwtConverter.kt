@@ -29,13 +29,17 @@ class KeycloackJwtConverter : Converter<Jwt, Mono<AbstractAuthenticationToken>> 
 
 
     private fun extractResourcesRoles(jwt: Jwt): Collection<GrantedAuthority> {
-        val resourceAccess = mutableMapOf<String, Any>(jwt.getClaim("resource_access"))
+        val resourceAccess = jwt.getClaimAsMap("resource_access") ?: return emptySet()
 
-        val accountAccess = resourceAccess["account"] as Map<*, *>
-        val roles = accountAccess["roles"] as List<*>
-        return roles.stream()
-            .map { role ->
-                SimpleGrantedAuthority("ROLE_" + role.toString().replace("-", "_"))
-            }.collect(toSet())
+        val allRoles = resourceAccess.values
+            .asSequence()
+            .filterIsInstance<Map<*, *>>()
+            .flatMap { it["roles"] as? Collection<*> ?: emptyList() }
+            .filterNotNull()
+            .map { "ROLE_${it.toString().replace("-", "_")}" }
+            .map { SimpleGrantedAuthority(it) }
+            .toList()
+
+        return allRoles.toSet()
     }
 }
