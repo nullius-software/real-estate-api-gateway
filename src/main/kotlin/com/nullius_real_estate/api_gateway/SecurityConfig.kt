@@ -20,6 +20,7 @@ class SecurityConfig {
             .csrf { it.disable() }
             .cors(Customizer.withDefaults())
             .authorizeExchange {
+                it.pathMatchers("/api/auth/register", "/api/auth/login").permitAll()
                 it.anyExchange().authenticated()
             }
             .oauth2ResourceServer {

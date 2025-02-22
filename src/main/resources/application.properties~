@@ -12,10 +12,6 @@ spring.cloud.gateway.routes[0].id=user-microservice
 spring.cloud.gateway.routes[0].uri=lb://user-microservice
 spring.cloud.gateway.routes[0].predicates[0]=Path=/api/user/**
 
-spring.cloud.gateway.routes[1].id=auth-microservice
-spring.cloud.gateway.routes[1].uri=lb://auth-microservice
-spring.cloud.gateway.routes[1].predicates[0]=Path=/api/auth/**
-
-spring.cloud.gateway.routes[2].id=estate-microservice
-spring.cloud.gateway.routes[2].uri=lb://estate-microservice
-spring.cloud.gateway.routes[2].predicates[0]=Path=/api/estate/**
+spring.cloud.gateway.routes[1].id=estate-microservice
+spring.cloud.gateway.routes[1].uri=lb://estate-microservice
+spring.cloud.gateway.routes[1].predicates[0]=Path=/api/estate/**
