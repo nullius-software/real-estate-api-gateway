@@ -20,7 +20,31 @@ class SecurityConfig {
             .csrf { it.disable() }
             .cors(Customizer.withDefaults())
             .authorizeExchange {
-                it.pathMatchers("/api/auth/register", "/api/auth/login").permitAll()
+                it.pathMatchers(
+//                    Auth
+                    "/api/auth/register",
+                    "/api/auth/login",
+
+//                    Docs
+                    "/webjars/swagger-ui/**",
+                    "/swagger-ui.html",
+                    "/v3/api-docs/**",
+
+//                    User Docs
+                    "/api/user/webjars/**",
+                    "/api/user/swagger-ui/**",
+                    "/api/user/v3/**",
+
+//                    Auth Docs
+                    "/api/auth/webjars/**",
+                    "/api/auth/swagger-ui/**",
+                    "/api/auth/v3/**",
+
+//                    Estate Docs
+                    "/api/estate/webjars/**",
+                    "/api/estate/swagger-ui/**",
+                    "/api/estate/v3/**"
+                ).permitAll()
                 it.anyExchange().authenticated()
             }
             .oauth2ResourceServer {
