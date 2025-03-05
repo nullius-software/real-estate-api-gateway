@@ -24,6 +24,7 @@ class SecurityConfig {
 //                    Auth
                     "/api/auth/register",
                     "/api/auth/login",
+                    "/api/auth/user/{keycloakUserId}/is-verified",
 
 //                    Docs
                     "/webjars/swagger-ui/**",
