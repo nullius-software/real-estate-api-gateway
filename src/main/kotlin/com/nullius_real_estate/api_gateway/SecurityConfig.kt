@@ -25,6 +25,7 @@ class SecurityConfig {
                     "/api/auth/register",
                     "/api/auth/login",
                     "/api/auth/user/{keycloakUserId}/is-verified",
+                    "/api/auth/user/{keycloakUserId}/resend-verification-email",
 
 //                    Docs
                     "/webjars/swagger-ui/**",
